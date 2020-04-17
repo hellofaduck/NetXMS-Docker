@@ -11,7 +11,7 @@ services:
             - pgdata:/var/lib/postgresql/data
 
     netxms-server:
-        image: netxms-local:latest
+        image: hellofaduck/netxms:latest
         restart: unless-stopped
         ports:
             - "4701:4701" # client -> server
