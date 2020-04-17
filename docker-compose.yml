@@ -1,0 +1,42 @@
+version: '2'
+services:
+    postgres:
+        image: postgres:latest
+        restart: unless-stopped
+        environment:
+            - POSTGRES_USER=netxms
+            - POSTGRES_PASSWORD=netxms
+            - TZ=Europe/Moscow
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+
+    netxms-server:
+        image: netxms-local:latest
+        restart: unless-stopped
+        ports:
+            - "4701:4701" # client -> server
+            - "4702:4702" # mgmt console -> server
+            - "514:514/udp" # syslog server
+        depends_on:
+            - postgres
+        links:
+            - postgres
+        volumes:
+            - netxmsdata:/data
+        environment:
+            - NETXMSD_DB_LOGIN=netxms
+            - NETXMSD_DB_PASSWORD=netxms
+            - NETXMSD_DB_NAME=netxms
+            - NETXMSD_UNLOCK_ON_STARTUP=1
+            - NETXMSD_UPGRADE_ON_STARTUP=1
+            - NETXMSD_DEBUG_LEVEL=0
+            - NETXMSD_CONFIG=
+            - NETXMSD_UPGRADE_PARAMS=
+            - TZ=Europe/Moscow
+        command: ["./docker-entrypoint.sh"]
+
+volumes:
+    pgdata:
+      driver: local
+    netxmsdata:
+      driver: local
