@@ -10,4 +10,4 @@ https://hub.docker.com/r/hellofaduck/netxms
 Please, if you found any problems or bugs (not in NetXMS :) ) you can submit it through github (preffered way) or PM me on reddit
 https://www.reddit.com/user/hellofaduck
 
-If you hate docker docker commandline interface as I, use great tool - portainer.io, a fantastic GUI for docker!
+If you hate docker commandline interface as I, use great tool - portainer.io, a fantastic GUI for docker!
