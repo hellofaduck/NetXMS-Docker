@@ -1,7 +1,7 @@
 version: '2'
 services:
     postgres:
-        image: postgres:latest
+        image: postgres:12.5
         restart: unless-stopped
         environment:
             - POSTGRES_USER=netxms
